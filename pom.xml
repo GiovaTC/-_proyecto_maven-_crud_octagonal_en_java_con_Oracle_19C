@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,16 +17,16 @@
     </properties>
 
     <repositories>
-        <!-- Repositorio público confiable (sin login) -->
+        <!-- Repositorio Maven Central (para Oracle JDBC 21.9.0.0) -->
         <repository>
-            <id>eclipse-orbit</id>
-            <name>Eclipse Orbit Repository</name>
-            <url>https://repo.eclipse.org/content/groups/orbit/</url>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo1.maven.org/maven2/</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- Logging -->
+        <!-- Logging con SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -39,12 +40,11 @@
             <version>2.1.1</version>
         </dependency>
 
-        <!-- Driver Oracle JDBC -->
+        <!-- Driver JDBC Oracle (versión pública estable) -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
-            <version>23.2.0.0</version>
-            <scope>runtime</scope>
+            <version>21.9.0.0</version>
         </dependency>
     </dependencies>
 
@@ -59,6 +59,16 @@
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin opcional para ejecutar clases directamente -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.example.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
